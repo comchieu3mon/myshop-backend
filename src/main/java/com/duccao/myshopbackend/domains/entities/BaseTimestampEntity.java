@@ -21,7 +21,6 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity
 @MappedSuperclass
 @FieldDefaults(level = PROTECTED)
 @Getter

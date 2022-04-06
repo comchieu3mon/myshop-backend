@@ -28,9 +28,6 @@ public class UserEntity extends BaseTimestampEntity implements UserDetails {
   @Column(name = "email", unique = true)
   String email;
 
-  @Column(name = "client_id", nullable = false)
-  String client_id;
-
   @Column(name = "password", nullable = false)
   String password;
 
