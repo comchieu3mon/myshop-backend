@@ -26,7 +26,7 @@ import org.springframework.security.core.GrantedAuthority;
 public class Authority extends BaseTimestampEntity implements GrantedAuthority {
   @Enumerated(EnumType.STRING)
   @Column(name = "name")
-  private AuthorityName name;
+  AuthorityName name;
 
   @Override
   public String getAuthority() {

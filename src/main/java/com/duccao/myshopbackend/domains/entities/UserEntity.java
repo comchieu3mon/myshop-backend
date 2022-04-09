@@ -14,7 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +25,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @NoArgsConstructor
 @AllArgsConstructor(access = PACKAGE)
 @FieldDefaults(level = PRIVATE)
+@Getter
+@Setter
 public class UserEntity extends BaseTimestampEntity implements UserDetails {
 
   @Column(name = "email", unique = true)
@@ -80,5 +84,9 @@ public class UserEntity extends BaseTimestampEntity implements UserDetails {
   @Override
   public boolean isEnabled() {
     return active;
+  }
+
+  public List<Authority> getRoles() {
+    return this.authorities;
   }
 }
