@@ -1,7 +1,5 @@
 package com.duccao.myshopbackend.services;
 
-import static lombok.AccessLevel.PRIVATE;
-
 import com.duccao.myshopbackend.domains.dto.AuthenticationDTO;
 import com.duccao.myshopbackend.domains.dto.CredentialDTO;
 import com.duccao.myshopbackend.domains.entities.UserEntity;
@@ -10,7 +8,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,17 +15,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import static com.duccao.myshopbackend.domains.common.CommonConstants.ADMIN_PASSWORD;
+import static com.duccao.myshopbackend.domains.common.CommonConstants.ADMIN_USERNAME;
+import static lombok.AccessLevel.PRIVATE;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
 @FieldDefaults(level = PRIVATE, makeFinal = true)
 public class AuthenticationService {
-
-  public static final String ADMIN_USERNAME =
-      "admin"; // This is stored as default "admin" user in DB.
-
-  @Value("${admin.secret}")
-  String adminSecret;
 
   @NonNull AuthenticationManager authenticationManager;
   @NonNull TokenHelper tokenHelper;
@@ -55,7 +50,7 @@ public class AuthenticationService {
 
     // Only allow Admin user login using this method
     if (!ADMIN_USERNAME.equalsIgnoreCase(credential.getUsername())
-        || !adminSecret.equals(credential.getPassword())) {
+        || !ADMIN_PASSWORD.equals(credential.getPassword())) {
       throw new BadCredentialsException("Invalid credential.");
     }
     final String token = tokenHelper.generateAdminToken(credential.getUsername());

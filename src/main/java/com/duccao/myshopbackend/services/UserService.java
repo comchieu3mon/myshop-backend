@@ -1,7 +1,5 @@
 package com.duccao.myshopbackend.services;
 
-import static lombok.AccessLevel.PRIVATE;
-
 import com.duccao.myshopbackend.domains.dto.RegisteredUserDTO;
 import com.duccao.myshopbackend.domains.dto.UserDTO;
 import com.duccao.myshopbackend.domains.entities.Authority;
@@ -12,11 +10,6 @@ import com.duccao.myshopbackend.exception.UserAlreadyExistException;
 import com.duccao.myshopbackend.repository.AuthorityRepository;
 import com.duccao.myshopbackend.repository.UserRepository;
 import com.duccao.myshopbackend.utils.TokenHelper;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -27,9 +20,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+import static com.duccao.myshopbackend.domains.common.CommonConstants.ADMIN_USERNAME;
+import static lombok.AccessLevel.PRIVATE;
+
 @Service
 @Slf4j
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
 public class UserService {
 
@@ -82,7 +84,7 @@ public class UserService {
     List<UserEntity> users = userRepository.findAll();
     return users.stream()
         // Force to remove "admin" user out of the user list
-        .filter(user -> !AuthenticationService.ADMIN_USERNAME.equalsIgnoreCase(user.getUsername()))
+        .filter(user -> !ADMIN_USERNAME.equalsIgnoreCase(user.getUsername()))
         .sorted(Comparator.comparing(UserEntity::getUsername, String.CASE_INSENSITIVE_ORDER))
         .map(Mapper::convert)
         .toList();
