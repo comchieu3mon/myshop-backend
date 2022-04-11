@@ -6,9 +6,9 @@ import static lombok.AccessLevel.PRIVATE;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,13 +16,23 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Table(name = "users")
 @Entity
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor(access = PACKAGE)
 @FieldDefaults(level = PRIVATE)
-@Getter
-@Setter
-@Table(name = "users")
 public class UserEntity extends BaseTimestampEntity implements UserDetails {
 
   @Column(name = "email", unique = true)
