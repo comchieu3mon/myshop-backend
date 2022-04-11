@@ -30,6 +30,4 @@ public class UserController {
     UserDTO res = userService.create(registeredUserDTO);
     return ResponseEntity.ok().body(res);
   }
-
-
 }
