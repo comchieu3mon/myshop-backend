@@ -1,12 +1,8 @@
 package com.duccao.myshopbackend.config;
 
-import static lombok.AccessLevel.PRIVATE;
-
 import com.duccao.myshopbackend.services.UserDetailsService;
 import com.duccao.myshopbackend.utils.TokenHelper;
-import java.util.Arrays;
-import java.util.Collections;
-import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +23,11 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import java.util.Arrays;
+import java.util.Collections;
+
+import static lombok.AccessLevel.PRIVATE;
+
 @EnableWebSecurity
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -39,11 +40,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     return new BCryptPasswordEncoder();
   }
 
-  TokenHelper tokenHelper;
+  @NonNull TokenHelper tokenHelper;
 
-  UserDetailsService userDetailsService;
+  @NonNull UserDetailsService userDetailsService;
 
-  RestAuthenticationEntryPoint authenticationEntryPoint;
+  @NonNull RestAuthenticationEntryPoint authenticationEntryPoint;
 
   @Bean
   @Override
@@ -71,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers(
             HttpMethod.GET,
-            "/",
+                "/",
             "/webjars/**",
             "/*.html",
             "/favicon.ico",
@@ -114,8 +115,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(
             HttpMethod.GET,
             "/",
-            "/users/inactive",
-            "/users/is-deactivate/**",
             "/webjars/**",
             "/*.html",
             "/favicon.ico",

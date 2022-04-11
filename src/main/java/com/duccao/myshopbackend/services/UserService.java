@@ -9,7 +9,6 @@ import com.duccao.myshopbackend.exception.InvalidRequestException;
 import com.duccao.myshopbackend.exception.UserAlreadyExistException;
 import com.duccao.myshopbackend.repository.AuthorityRepository;
 import com.duccao.myshopbackend.repository.UserRepository;
-import com.duccao.myshopbackend.utils.TokenHelper;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -38,9 +37,8 @@ public class UserService {
   @NonNull UserRepository userRepository;
   @NonNull AuthorityRepository authorityRepository;
   @Lazy @NonNull PasswordEncoder passwordEncoder;
-  @Lazy @NonNull TokenHelper tokenHelper;
 
-  public RegisteredUserDTO create(RegisteredUserDTO registeredUser)
+  public UserDTO create(RegisteredUserDTO registeredUser)
       throws UserAlreadyExistException, InvalidRequestException {
     log.info("Register User Begin, UserDTO: {}", registeredUser);
     if (emailExists(registeredUser.getEmail())) {
@@ -73,7 +71,7 @@ public class UserService {
       log.error(e.getMessage());
     }
 
-    return Mapper.from(user);
+    return Mapper.convert(user);
   }
 
   public Authentication getLoggedUser() {
