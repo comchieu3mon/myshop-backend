@@ -42,24 +42,24 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
   @Override
   public ResponseEntity<Object> handleNoHandlerFoundException(
-          NoHandlerFoundException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+      NoHandlerFoundException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
     return ResponseEntity.status(status)
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(new ErrorMessage("Request Endpoint not found"));
+        .contentType(MediaType.APPLICATION_JSON)
+        .body(new ErrorMessage("Request Endpoint not found"));
   }
 
   @Override
   protected ResponseEntity<Object> handleMethodArgumentNotValid(
-          MethodArgumentNotValidException ex,
-          HttpHeaders headers,
-          HttpStatus status,
-          WebRequest request) {
+      MethodArgumentNotValidException ex,
+      HttpHeaders headers,
+      HttpStatus status,
+      WebRequest request) {
     List<String> errors =
-            ex.getBindingResult().getFieldErrors().stream()
-                    .map(FieldError::getDefaultMessage)
-                    .map(StringUtils::capitalize)
-                    .sorted()
-                    .toList();
+        ex.getBindingResult().getFieldErrors().stream()
+            .map(FieldError::getDefaultMessage)
+            .map(StringUtils::capitalize)
+            .sorted()
+            .toList();
     ErrorMessage errorMessage = new ErrorMessage(String.join(". ", errors));
     return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
   }
