@@ -1,0 +1,5 @@
+insert into category (id, timestamp_created, timestamp_modified, name, description) values ('0cca852b-9ee6-4cea-8be9-5e34ca4bb85f', '2004-10-19 10:23:54', '2004-10-19 10:23:54', 'Toyota', 'Celica');
+insert into category (id, timestamp_created, timestamp_modified, name, description) values ('01dafe58-a787-418c-8c30-9ac64436e61c', '2004-10-19 10:23:54', '2004-10-19 10:23:54', 'Pontiac', 'Grand Prix');
+insert into category (id, timestamp_created, timestamp_modified, name, description) values ('860b0975-dd44-4a37-844e-69bd91c90fb6', '2004-10-19 10:23:54', '2004-10-19 10:23:54', 'Oldsmobile', 'Cutlass Supreme');
+insert into category (id, timestamp_created, timestamp_modified, name, description) values ('7daf8b8c-2803-4891-b13d-153ce89cb391', '2004-10-19 10:23:54', '2004-10-19 10:23:54', 'Hyundai', 'Tiburon');
+insert into category (id, timestamp_created, timestamp_modified, name, description) values ('dc838cee-ed71-4ad3-b840-cdb1e3b0e606', '2004-10-19 10:23:54', '2004-10-19 10:23:54', 'Audi', '5000CS Quattro');
