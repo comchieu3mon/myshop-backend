@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class CategoryEntity extends BaseTimestampEntity {
   @Column(name = "description")
   String description;
 
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "category", orphanRemoval = true)
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "category", orphanRemoval = true)
   List<ProductEntity> products = new ArrayList<>();
 
   public void addProduct(ProductEntity product) {

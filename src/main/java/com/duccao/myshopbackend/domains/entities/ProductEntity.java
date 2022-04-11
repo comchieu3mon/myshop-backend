@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -33,5 +34,6 @@ public class ProductEntity extends BaseTimestampEntity {
   String imagePath;
 
   @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "category_id")
   CategoryEntity category;
 }
