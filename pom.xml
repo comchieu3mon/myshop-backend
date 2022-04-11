@@ -19,6 +19,8 @@
     <jwt.version>0.9.1</jwt.version>
     <guava.version>30.1.1-jre</guava.version>
     <lombok.version>1.18.22</lombok.version>
+    <springdoc.version>1.6.2</springdoc.version>
+    <springdoc-openapi-maven-plugin.version>1.3</springdoc-openapi-maven-plugin.version>
   </properties>
   <dependencies>
     <dependency>
@@ -82,6 +84,31 @@
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
     </dependency>
+    <!--  Spring-rest docs  -->
+    <dependency>
+      <groupId>org.springframework.restdocs</groupId>
+      <artifactId>spring-restdocs-mockmvc</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
+      <version>${springdoc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-webmvc-core</artifactId>
+      <version>${springdoc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-javadoc</artifactId>
+      <version>${springdoc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
@@ -122,6 +149,25 @@
               <version>0.2.0</version>
             </dependency>
           </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi-maven-plugin</artifactId>
+        <version>${springdoc-openapi-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>integration-test</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <apiDocsUrl>http://localhost:8080/v1/myshop/v3/api-docs</apiDocsUrl>
+          <outputFileName>api.json</outputFileName>
+          <outputDir>../duccao/docs</outputDir>
+          <skip>false</skip>
         </configuration>
       </plugin>
     </plugins>
