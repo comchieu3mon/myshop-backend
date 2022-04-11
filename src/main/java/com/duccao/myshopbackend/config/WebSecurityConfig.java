@@ -72,7 +72,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers(
             HttpMethod.GET,
-                "/**",
+                "/",
+                "/users/**",
             "/webjars/**",
             "/*.html",
             "/favicon.ico",
@@ -114,7 +115,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     web.ignoring()
         .antMatchers(
             HttpMethod.GET,
-            "/**",
+            "/",
+            "/users/**",
             "/webjars/**",
             "/*.html",
             "/favicon.ico",
