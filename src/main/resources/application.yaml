@@ -8,7 +8,7 @@ spring:
     name: myshop
   jpa:
     hibernate:
-      ddl-auto: ${DDL_AUTO:none}
+      ddl-auto: ${DDL_AUTO:update}
     show-sql: true
     properties:
       hibernate:
