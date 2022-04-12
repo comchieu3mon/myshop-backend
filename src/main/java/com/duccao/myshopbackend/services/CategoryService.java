@@ -49,4 +49,9 @@ public class CategoryService {
   public void deleteCategory(UUID id) {
     categoryRepository.deleteById(id);
   }
+
+  public CategoryDTO create(CategoryDTO categoryDTO) {
+    return CategoryMapper.INSTANCE.categoryEntityToCategoryDTO(
+        categoryRepository.save(CategoryMapper.INSTANCE.categoryDtoToCategoryEntity(categoryDTO)));
+  }
 }

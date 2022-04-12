@@ -13,5 +13,7 @@ public interface CategoryMapper {
 
   CategoryDTO categoryEntityToCategoryDTO(CategoryEntity product);
 
+  CategoryEntity categoryDtoToCategoryEntity(CategoryDTO categoryDTO);
+
   List<CategoryDTO> lstCategoryEntityToLstCategoryDTO(List<CategoryEntity> products);
 }
