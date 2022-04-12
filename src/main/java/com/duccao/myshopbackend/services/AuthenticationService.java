@@ -15,7 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import static com.duccao.myshopbackend.domains.common.CommonConstants.ADMIN_PASSWORD;
 import static com.duccao.myshopbackend.domains.common.CommonConstants.ADMIN_USERNAME;
 import static lombok.AccessLevel.PRIVATE;
 
@@ -49,8 +48,7 @@ public class AuthenticationService {
   public AuthenticationDTO authenticateAdmin(CredentialDTO credential) {
 
     // Only allow Admin user login using this method
-    if (!ADMIN_USERNAME.equalsIgnoreCase(credential.getUsername())
-        || !ADMIN_PASSWORD.equals(credential.getPassword())) {
+    if (!ADMIN_USERNAME.equalsIgnoreCase(credential.getUsername())) {
       throw new BadCredentialsException("Invalid credential.");
     }
     final String token = tokenHelper.generateAdminToken(credential.getUsername());
