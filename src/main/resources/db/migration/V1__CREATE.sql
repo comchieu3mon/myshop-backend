@@ -34,3 +34,31 @@ CREATE TABLE authority_role
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 );
+
+CREATE TABLE IF NOT EXISTS category
+(
+    id uuid NOT NULL,
+    timestamp_created timestamp without time zone NOT NULL,
+    timestamp_modified timestamp without time zone NOT NULL,
+    description character varying(255),
+    name character varying(255),
+    CONSTRAINT category_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS product
+(
+    id uuid NOT NULL,
+    timestamp_created timestamp without time zone NOT NULL,
+    timestamp_modified timestamp without time zone NOT NULL,
+    availability boolean NOT NULL,
+    description character varying(255),
+    image_path character varying(255),
+    name character varying(255),
+    price double precision NOT NULL,
+    category_id uuid,
+    CONSTRAINT product_pkey PRIMARY KEY (id),
+    CONSTRAINT fk1mtsbur82frn64de7balymq9s FOREIGN KEY (category_id)
+    REFERENCES category (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+)
