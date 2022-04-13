@@ -9,6 +9,7 @@ import com.duccao.myshopbackend.exception.InvalidRequestException;
 import com.duccao.myshopbackend.exception.UserAlreadyExistException;
 import com.duccao.myshopbackend.repository.AuthorityRepository;
 import com.duccao.myshopbackend.repository.UserRepository;
+import javax.persistence.EntityNotFoundException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -120,5 +121,13 @@ public class UserService {
       throw new InvalidRequestException(String.format("User (%s) doesn't exist", userId));
     }
     return user.get();
+  }
+
+  public UserDTO findById(String id) {
+    return Mapper.convert(
+        userRepository
+            .findById(UUID.fromString(id))
+            .orElseThrow(
+                () -> new EntityNotFoundException(String.format("User with id: {} not found!"))));
   }
 }
