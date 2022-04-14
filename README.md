@@ -1,6 +1,6 @@
 # Getting Started
 
-### Reference Documentation
+### Reference Documentations
 
 For further reference, please consider the following sections:
 
