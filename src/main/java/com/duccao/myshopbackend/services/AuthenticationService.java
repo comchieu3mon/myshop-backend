@@ -51,6 +51,12 @@ public class AuthenticationService {
     if (!ADMIN_USERNAME.equalsIgnoreCase(credential.getUsername())) {
       throw new BadCredentialsException("Invalid credential.");
     }
+    Authentication authentication =
+        authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(
+                credential.getUsername(), credential.getPassword()));
+
+    SecurityContextHolder.getContext().setAuthentication(authentication);
     final String token = tokenHelper.generateAdminToken(credential.getUsername());
     return AuthenticationDTO.builder().token(token).expiredIn(tokenHelper.getExpiresIn()).build();
   }

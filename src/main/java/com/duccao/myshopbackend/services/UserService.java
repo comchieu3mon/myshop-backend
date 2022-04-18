@@ -1,5 +1,8 @@
 package com.duccao.myshopbackend.services;
 
+import static com.duccao.myshopbackend.domains.common.CommonConstants.ADMIN_USERNAME;
+import static lombok.AccessLevel.PRIVATE;
+
 import com.duccao.myshopbackend.domains.dto.RegisteredUserDTO;
 import com.duccao.myshopbackend.domains.dto.UserDTO;
 import com.duccao.myshopbackend.domains.entities.Authority;
@@ -9,6 +12,11 @@ import com.duccao.myshopbackend.exception.InvalidRequestException;
 import com.duccao.myshopbackend.exception.UserAlreadyExistException;
 import com.duccao.myshopbackend.repository.AuthorityRepository;
 import com.duccao.myshopbackend.repository.UserRepository;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -19,15 +27,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
-import static com.duccao.myshopbackend.domains.common.CommonConstants.ADMIN_USERNAME;
-import static lombok.AccessLevel.PRIVATE;
 
 @Service
 @Slf4j
@@ -113,14 +112,6 @@ public class UserService {
 
   private boolean emailExists(String email) {
     return userRepository.findByEmailIgnoreCase(email).isPresent();
-  }
-
-  private UserEntity getUserFromOptional(String userId) throws InvalidRequestException {
-    var user = userRepository.findById(UUID.fromString(userId));
-    if (user.isEmpty()) {
-      throw new InvalidRequestException(String.format("User (%s) doesn't exist", userId));
-    }
-    return user.get();
   }
 
   public UserDTO findById(String id) {

@@ -73,7 +73,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(
             HttpMethod.GET,
                 "/",
-                "/users/**",
             "/webjars/**",
             "/*.html",
             "/favicon.ico",
@@ -116,7 +115,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(
             HttpMethod.GET,
             "/",
-            "/users/**",
             "/webjars/**",
             "/*.html",
             "/favicon.ico",
