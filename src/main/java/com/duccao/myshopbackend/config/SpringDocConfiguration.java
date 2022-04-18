@@ -11,7 +11,9 @@ import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class SpringDocConfiguration {
   @Bean
   @ConditionalOnMissingBean(OpenAPI.class)
@@ -44,15 +46,5 @@ public class SpringDocConfiguration {
   @Bean
   public GroupedOpenApi scheduleApi() {
     return GroupedOpenApi.builder().group("Myshop API").pathsToMatch("/**").build();
-  }
-
-  @Bean
-  public OpenApiCustomiser sortSchemasAlphabetically() {
-    return openApi -> {
-      openApi
-          .getTags()
-          .sort(
-              (firstTag, secondTag) -> firstTag.getName().compareToIgnoreCase(secondTag.getName()));
-    };
   }
 }

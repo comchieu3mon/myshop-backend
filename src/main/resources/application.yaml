@@ -33,5 +33,10 @@ jwt:
   expiresIn: 6000
   issuer: NashTech
 
+springdoc:
+  swagger-ui:
+    tags-sorter: alpha
+    operations-sorter: alpha
+
 
 
