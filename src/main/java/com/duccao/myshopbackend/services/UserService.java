@@ -128,6 +128,7 @@ public class UserService {
         userRepository
             .findById(UUID.fromString(id))
             .orElseThrow(
-                () -> new EntityNotFoundException(String.format("User with id: {} not found!"))));
+                () ->
+                    new EntityNotFoundException(String.format("User with id: %s not found!", id))));
   }
 }

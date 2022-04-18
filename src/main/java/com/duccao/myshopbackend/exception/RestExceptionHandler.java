@@ -1,5 +1,6 @@
 package com.duccao.myshopbackend.exception;
 
+import javax.persistence.EntityNotFoundException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -37,6 +38,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
   @ExceptionHandler(value = IllegalArgumentException.class)
   @ResponseStatus(value = HttpStatus.BAD_REQUEST)
   public ErrorMessage illegalArgumentException(Exception exception, WebRequest webRequest) {
+    return new ErrorMessage(exception.getMessage());
+  }
+
+  @ExceptionHandler(value = EntityNotFoundException.class)
+  @ResponseStatus(value = HttpStatus.NOT_FOUND)
+  public ErrorMessage entityNotFoundException(Exception exception, WebRequest webRequest) {
     return new ErrorMessage(exception.getMessage());
   }
 

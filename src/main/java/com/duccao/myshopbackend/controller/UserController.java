@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,12 +39,22 @@ public class UserController {
     return ResponseEntity.ok().body(res);
   }
 
+//  @GetMapping
+//  public ResponseEntity<List<ProductDTO>> findByCategory() {
+//    return ResponseEntity.ok()
+//        .body(
+//            ProductMapper.INSTANCE.lstProductEntityToLstProductDTO(
+//                productRepository.findByCategory_Id(
+//                    UUID.fromString("dc838cee-ed71-4ad3-b840-cdb1e3b0e606"))));
+//  }
+
   @GetMapping
-  public ResponseEntity<List<ProductDTO>> findByCategory() {
-    return ResponseEntity.ok()
-        .body(
-            ProductMapper.INSTANCE.lstProductEntityToLstProductDTO(
-                productRepository.findByCategory_Id(
-                    UUID.fromString("dc838cee-ed71-4ad3-b840-cdb1e3b0e606"))));
+  public ResponseEntity<List<UserDTO>> findAll() {
+    return ResponseEntity.ok().body(userService.findAll());
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<UserDTO> findById(@PathVariable(name = "id") String id) {
+    return ResponseEntity.ok().body(userService.findById(id));
   }
 }
