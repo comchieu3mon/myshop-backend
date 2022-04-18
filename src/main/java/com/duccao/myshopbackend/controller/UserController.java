@@ -6,6 +6,7 @@ import com.duccao.myshopbackend.exception.InvalidRequestException;
 import com.duccao.myshopbackend.repository.ProductRepository;
 import com.duccao.myshopbackend.services.UserService;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import lombok.AccessLevel;
 import lombok.NonNull;
@@ -46,13 +47,15 @@ public class UserController {
   //  }
 
   @GetMapping
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  @RolesAllowed({"ROLE_ADMIN"})
+//  @PreAuthorize("hasRole('ROLE_ADMIN')")
   public ResponseEntity<List<UserDTO>> findAll() {
     return ResponseEntity.ok().body(userService.findAll());
   }
 
   @GetMapping("/{id}")
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  @RolesAllowed({"ROLE_ADMIN"})
+//  @PreAuthorize("hasRole('ROLE_ADMIN')")
   public ResponseEntity<UserDTO> findById(@PathVariable(name = "id") String id) {
     return ResponseEntity.ok().body(userService.findById(id));
   }
