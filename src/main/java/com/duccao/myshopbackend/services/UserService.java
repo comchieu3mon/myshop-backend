@@ -123,4 +123,8 @@ public class UserService {
                 () ->
                     new EntityNotFoundException(String.format("User with id: %s not found!", id))));
   }
+
+  public void deleteById(String id) {
+    userRepository.deleteById(UUID.fromString(id));
+  }
 }
