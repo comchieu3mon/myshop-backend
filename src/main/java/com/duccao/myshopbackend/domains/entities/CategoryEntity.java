@@ -2,9 +2,11 @@ package com.duccao.myshopbackend.domains.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.CascadeType;
@@ -27,6 +29,8 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor
 @AllArgsConstructor(access = PACKAGE)
 @FieldDefaults(level = PRIVATE)
+@ToString
+@EqualsAndHashCode
 public class CategoryEntity extends BaseTimestampEntity {
 
   @Column(name = "name")
@@ -35,8 +39,9 @@ public class CategoryEntity extends BaseTimestampEntity {
   @Column(name = "description")
   String description;
 
+  @Builder.Default
   @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "category", orphanRemoval = true)
-  List<ProductEntity> products = new ArrayList<>();
+  private List<ProductEntity> products = new ArrayList<>();
 
   public void addProduct(ProductEntity product) {
     products.add(product);

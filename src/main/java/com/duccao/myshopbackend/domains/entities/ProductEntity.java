@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.Entity;
@@ -22,6 +23,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@ToString
 public class ProductEntity extends BaseTimestampEntity {
   String name;
 

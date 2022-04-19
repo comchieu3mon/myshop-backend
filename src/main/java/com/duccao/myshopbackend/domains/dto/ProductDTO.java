@@ -17,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ProductDTO {
     UUID id;
+    String name;
     double price;
     String description;
     boolean availability;

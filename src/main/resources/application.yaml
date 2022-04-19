@@ -4,6 +4,9 @@ server:
     context-path: ${BASE_URL:/v1/myshop}
 
 spring:
+  output:
+    ansi:
+      enabled: always
   application:
     name: myshop
   jpa:
