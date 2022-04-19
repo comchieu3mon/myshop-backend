@@ -1,6 +1,5 @@
 package com.duccao.myshopbackend.exception;
 
-import javax.persistence.EntityNotFoundException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -17,7 +16,9 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice
@@ -66,7 +67,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
             .map(FieldError::getDefaultMessage)
             .map(StringUtils::capitalize)
             .sorted()
-            .toList();
+            .collect(Collectors.toList());
     ErrorMessage errorMessage = new ErrorMessage(String.join(". ", errors));
     return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
   }
