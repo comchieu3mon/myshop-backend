@@ -62,6 +62,7 @@ public class UserController {
   }
 
   @DeleteMapping("/{id}")
+  @RolesAllowed({"ROLE_ADMIN"})
   public void deleteById(@PathVariable(name = "id") String id) {
     userService.deleteById(id);
   }
